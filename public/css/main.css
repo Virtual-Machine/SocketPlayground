@@ -8,3 +8,8 @@ html, body {
 	overflow: hidden;
 	color: #237843;
 }
+
+#container {
+	width: 90%;
+	margin: auto;
+}

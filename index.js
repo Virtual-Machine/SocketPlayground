@@ -23,6 +23,17 @@ const httpsServer = https.createServer(credentials, app);
 
 httpServer.listen(8000);
 httpsServer.listen(8443);
+const io = require('socket.io')(httpServer);
+const io2 = require('socket.io')(httpsServer);
+
 
 console.log("localhost:8000 accepting http requests")
 console.log("localhost:8443 accepting https requests")
+
+io.on('connection', function(socket){
+  console.log('a user connected to a standard socket');
+});
+
+io2.on('connection', function(socket){
+  console.log('a user connected to a secure socket');
+});

@@ -7,10 +7,12 @@ const phrase = fs.readFileSync('certs/phrase', 'utf8');
 
 const credentials = {key: privateKey, cert: certificate, passphrase: phrase};
 const express = require('express');
+const morgan = require('morgan');
 const app = express();
 
 app.use(express.static('public/js/'))
 app.use(express.static('public/css/'))
+app.use(morgan('dev'))
 
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/index.html')

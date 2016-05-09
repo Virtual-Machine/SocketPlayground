@@ -31,9 +31,23 @@ console.log("localhost:8000 accepting http requests")
 console.log("localhost:8443 accepting https requests")
 
 io.on('connection', function(socket){
-  console.log('a user connected to a standard socket');
+  console.log('a user connected');
+  socket = socketBehaviour(socket)
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
 });
 
 io2.on('connection', function(socket){
-  console.log('a user connected to a secure socket');
+  console.log('a user connected to secure socket');
+  socket = socketBehaviour(socket)
+  socket.on('disconnect', function(){
+    console.log('user disconnected from secure socket');
+  });
 });
+
+function socketBehaviour(socket){
+	socket.emit("USERConnect")
+	socket.broadcast.emit("USERConnect")
+	return socket
+}
